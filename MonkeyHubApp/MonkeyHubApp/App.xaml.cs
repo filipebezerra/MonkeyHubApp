@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MonkeyHubApp.Pages;
 
 using Xamarin.Forms;
 
@@ -13,7 +10,7 @@ namespace MonkeyHubApp
         {
             InitializeComponent();
 
-            MainPage = new MonkeyHubApp.MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

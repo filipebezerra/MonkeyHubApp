@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonkeyHubApp.Pages.SearchContentPage"
+             xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
+             Title="{Binding Title}"
+             >
+    <StackLayout>
+        <SearchBar
+            Placeholder="Digite partes do conteúdo desejado"
+            SearchCommand="{Binding SearchCommand}"
+            Text="{Binding SearchText, Mode=OneWayToSource}"
+            />
+
+        <controls:FullListView Style="{StaticResource ListView}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical">
+                            <Label
+                                Style="{StaticResource SpacedFirstLineText}"
+                                Text="{Binding Name}"
+                                />
+                            <Label
+                                Style="{StaticResource SpacedSecondLineText}"
+                                Text="{Binding Description}"
+                                />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </controls:FullListView>
+    </StackLayout>
+</ContentPage>

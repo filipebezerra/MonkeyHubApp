@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MonkeyHubApp"
+             xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
+             x:Class="MonkeyHubApp.Pages.MainPage"
+             Title="{Binding Title}"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PageHeaderText" BaseResourceKey="HeaderText" TargetType="Label">
+                <Setter Property="Text" Value="Categorias" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <ContentView Style="{StaticResource HeaderContainer}">
+            <Label Style="{StaticResource PageHeaderText}" />
+        </ContentView>
+        
+        <controls:FullListView Style="{StaticResource ListView}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="16">
+                            <Label
+                                Style="{StaticResource FirstLineText}"
+                                Text="{Binding Name}"
+                                />
+                            <Label
+                                Style="{StaticResource SecondLineText}"
+                                Text="{Binding Description}"
+                                />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </controls:FullListView>
+    </StackLayout>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Buscar"
+            Order="Primary"
+            Command="{Binding ShowSearchPageCommand}"
+            >
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource"
+                            Android="ic_search_white_24dp"
+                            iOS="ic_search_white"
+                            />
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem
+            Text="Sobre"
+            Order="Secondary"
+            Command="{Binding AboutCommand}"
+            />
+    </ContentPage.ToolbarItems>
+</ContentPage>

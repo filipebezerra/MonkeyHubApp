@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonkeyHubApp.Pages.AboutPage"
+             Title="{Binding Title}"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="PagerHeaderText" BaseResourceKey="HeaderText" TargetType="Label">
+                <Setter Property="Text" Value="Informações gerais" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout>
+        <ContentView Style="{StaticResource HeaderContainer}">
+            <Label Style="{StaticResource PagerHeaderText}" />
+        </ContentView>
+        
+        <TableView>
+            <TableRoot>
+                <TableSection Title="Versão" >
+                    <TextCell Text="{Binding Version}" />
+                </TableSection>
+                <TableSection Title="Termos de uso">
+                    <SwitchCell Text="Aceito os termos de uso" />
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </StackLayout>
+</ContentPage>
