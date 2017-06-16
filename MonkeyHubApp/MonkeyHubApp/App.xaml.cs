@@ -1,4 +1,5 @@
-﻿using MonkeyHubApp.Pages;
+﻿using MonkeyHubApp.Helpers;
+using MonkeyHubApp.Pages;
 
 using Xamarin.Forms;
 
@@ -10,7 +11,14 @@ namespace MonkeyHubApp
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            if (Settings.IsLoggedIn)
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
         }
 
         protected override void OnStart()
