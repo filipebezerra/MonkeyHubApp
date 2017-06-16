@@ -25,6 +25,14 @@
                 <TableSection Title="Termos de uso">
                     <SwitchCell Text="Aceito os termos de uso" />
                 </TableSection>
+                <TableSection Title="{Binding UserId, StringFormat='Logado como {0}'}">
+                    <ViewCell>
+                        <Button
+                            Text="Sair"
+                            Command="{Binding LogoutAsyncCommand}"
+                            />
+                    </ViewCell>
+                </TableSection>
             </TableRoot>
         </TableView>
     </StackLayout>

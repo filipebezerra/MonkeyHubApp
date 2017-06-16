@@ -17,6 +17,11 @@ namespace MonkeyHubApp.iOS.Auth
             return await client.LoginAsync(GetController(), provider, parameters);
         }
 
+        public async Task LogoutAsync(MobileServiceClient client)
+        {
+            await client.LogoutAsync();
+        }
+
         private UIKit.UIViewController GetController()
         {
             var window = UIKit.UIApplication.SharedApplication.KeyWindow;

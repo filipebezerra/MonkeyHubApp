@@ -50,5 +50,18 @@ namespace MonkeyHubApp.Services
                 return true;
             }
         }
+
+        public async Task LogoutAsync()
+        {
+            Initialize();
+
+            if (Settings.IsLoggedIn)
+            {
+                var auth = DependencyService.Get<IAuthentication>();
+                await auth.LogoutAsync(Client);
+                Settings.AuthToken = string.Empty;
+                Settings.UserId = string.Empty;
+            }
+        }
     }
 }

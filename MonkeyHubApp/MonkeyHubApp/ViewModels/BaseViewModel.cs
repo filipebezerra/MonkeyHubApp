@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -31,12 +32,7 @@ namespace MonkeyHubApp.ViewModels
         public async Task PushAsync<TViewModel>(params object [] args) where TViewModel : BaseViewModel
         {
             var viewModelType = typeof(TViewModel);
-            var viewModelTypeName = viewModelType.Name;
-            var viewModelWordLength = "ViewModel".Length;
-            var viewTypeName = $"MonkeyHubApp.Pages.{viewModelTypeName.Substring(0, viewModelTypeName.Length - viewModelWordLength)}Page";
-            var viewType = Type.GetType(viewTypeName);
-
-            var page = Activator.CreateInstance(viewType) as Page;
+            var page = CreatePage<TViewModel>();
             var viewModel = Activator.CreateInstance(viewModelType, args);
 
             if (page != null)
@@ -45,6 +41,26 @@ namespace MonkeyHubApp.ViewModels
             }
 
             await App.Current.MainPage.Navigation.PushAsync(page);
+        }
+
+        public async Task PushToRootAsync<TViewModel>() where TViewModel : BaseViewModel
+        {
+            var page = CreatePage<TViewModel>();
+
+            App.Current.MainPage.Navigation.InsertPageBefore(page, 
+                App.Current.MainPage.Navigation.NavigationStack.First());
+            await App.Current.MainPage.Navigation.PopToRootAsync();
+        }
+
+        private Page CreatePage<TViewModel>() where TViewModel : BaseViewModel
+        {
+            var viewModelType = typeof(TViewModel);
+            var viewModelTypeName = viewModelType.Name;
+            var viewModelWordLength = "ViewModel".Length;
+            var viewTypeName = $"MonkeyHubApp.Pages.{viewModelTypeName.Substring(0, viewModelTypeName.Length - viewModelWordLength)}Page";
+            var viewType = Type.GetType(viewTypeName);
+
+            return Activator.CreateInstance(viewType) as Page;
         }
 
         public string Title { get; }

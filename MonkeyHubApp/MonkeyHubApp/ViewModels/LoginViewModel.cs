@@ -32,19 +32,12 @@ namespace MonkeyHubApp.ViewModels
 
                     if (result)
                     {
-                        App.Current.MainPage = new NavigationPage(new MainPage());
+                        await PushToRootAsync<MainViewModel>();
                     }
                     else
                     {
                         await App.Current.MainPage.DisplayAlert("Algo deu errado",
                                 "Não conseguimos efetuar o seu login, tente novamente!", "Ok");
-                    }
-
-                    var existingPages = App.Current.MainPage.Navigation.NavigationStack.ToList();
-                    foreach (var page in existingPages)
-                    {
-                        if (page.GetType() == typeof(LoginPage))
-                            App.Current.MainPage.Navigation.RemovePage(page);
                     }
                 }
                 catch(Exception ex)
