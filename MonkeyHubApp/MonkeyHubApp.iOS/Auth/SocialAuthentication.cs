@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using MonkeyHubApp.Auth;
-using MonkeyHubApp.Helpers;
 using MonkeyHubApp.iOS.Auth;
 using Xamarin.Forms;
 
@@ -16,19 +14,7 @@ namespace MonkeyHubApp.iOS.Auth
             MobileServiceAuthenticationProvider provider, 
             IDictionary<string, string> parameters = null)
         {
-            try
-            {
-                var current = GetController();
-                var user = await client.LoginAsync(current, provider, parameters);
-                Settings.AuthToken = user?.MobileServiceAuthenticationToken ?? string.Empty;
-                Settings.UserId = user?.UserId ?? string.Empty;
-
-                return user;
-            } catch(Exception ex)
-            {
-                // TODO: log error
-                throw ex;
-            }
+            return await client.LoginAsync(GetController(), provider, parameters);
         }
 
         private UIKit.UIViewController GetController()

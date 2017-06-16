@@ -41,19 +41,12 @@ namespace MonkeyHubApp.Services
             {
                 Settings.AuthToken = string.Empty;
                 Settings.UserId = string.Empty;
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await App.Current.MainPage.DisplayAlert("Algo deu errado", 
-                        "Não conseguimos efetuar o seu login, tente novamente!", "Ok");
-                });
-
                 return false;
             }
             else
             {
                 Settings.AuthToken = user.MobileServiceAuthenticationToken;
                 Settings.UserId = user.UserId;
-
                 return true;
             }
         }

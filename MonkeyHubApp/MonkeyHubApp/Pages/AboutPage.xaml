@@ -19,7 +19,7 @@
         
         <TableView>
             <TableRoot>
-                <TableSection Title="Versão" >
+                <TableSection Title="Versão">
                     <TextCell Text="{Binding Version}" />
                 </TableSection>
                 <TableSection Title="Termos de uso">

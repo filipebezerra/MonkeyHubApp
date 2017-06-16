@@ -3,6 +3,8 @@ using MonkeyHubApp.Services;
 using Xamarin.Forms;
 using System.Linq;
 using MonkeyHubApp.Pages;
+using System;
+using System.Diagnostics;
 
 namespace MonkeyHubApp.ViewModels
 {
@@ -23,19 +25,35 @@ namespace MonkeyHubApp.ViewModels
         {
             if (LoginWithFacebookCommand.CanExecute(null))
             {
-                LoginWithFacebookCommand.ChangeCanExecute();
-                var result = await azureService.LoginAsync();
-
-                if (result)
+                try
                 {
-                    await PushAsync<MainViewModel>();
+                    LoginWithFacebookCommand.ChangeCanExecute();
+                    var result = await azureService.LoginAsync();
+
+                    if (result)
+                    {
+                        App.Current.MainPage = new NavigationPage(new MainPage());
+                    }
+                    else
+                    {
+                        await App.Current.MainPage.DisplayAlert("Algo deu errado",
+                                "Não conseguimos efetuar o seu login, tente novamente!", "Ok");
+                    }
+
+                    var existingPages = App.Current.MainPage.Navigation.NavigationStack.ToList();
+                    foreach (var page in existingPages)
+                    {
+                        if (page.GetType() == typeof(LoginPage))
+                            App.Current.MainPage.Navigation.RemovePage(page);
+                    }
                 }
-
-                var existingPages = App.Current.MainPage.Navigation.NavigationStack.ToList();
-                foreach (var page in existingPages)
+                catch(Exception ex)
                 {
-                    if (page.GetType() == typeof(LoginPage))
-                        App.Current.MainPage.Navigation.RemovePage(page);
+                    Debug.WriteLine($"[ExecuteLoginWithFacebookCommand] Error = {ex.Message}");
+                }
+                finally
+                {
+                    LoginWithFacebookCommand.ChangeCanExecute();
                 }
             }
         }
