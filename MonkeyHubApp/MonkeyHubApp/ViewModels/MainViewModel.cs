@@ -1,4 +1,5 @@
 ﻿using MonkeyHubApp.Models;
+using MonkeyHubApp.Notification;
 using MonkeyHubApp.Services;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
@@ -49,6 +50,12 @@ namespace MonkeyHubApp.ViewModels
             {
                 DataSource.Add(tag);
             }
+        }
+
+        public void RegisterForPushNotification()
+        {
+            var push = DependencyService.Get<IPushNotification>();
+            push.RegisterForPushNotification();
         }
     }
 }

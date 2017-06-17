@@ -1,6 +1,5 @@
 ﻿using MonkeyHubApp.Helpers;
 using MonkeyHubApp.Pages;
-
 using Xamarin.Forms;
 
 namespace MonkeyHubApp

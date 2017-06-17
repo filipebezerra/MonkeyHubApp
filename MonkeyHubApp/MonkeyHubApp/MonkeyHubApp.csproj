@@ -41,8 +41,10 @@
     </Compile>
     <Compile Include="Auth\IAuthentication.cs" />
     <Compile Include="Controls\FullListView.cs" />
+    <Compile Include="Helpers\Constants.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Notification\IPushNotification.cs" />
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>

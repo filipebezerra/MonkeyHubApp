@@ -10,15 +10,13 @@ namespace MonkeyHubApp.Services
 {
     public class AzureService
     {
-        private static readonly string AppUrl = "http://monkeyhub-app.azurewebsites.net";
-
         public MobileServiceClient Client { get; set; } = null;
 
         public static bool UseAuth { get; set; } = false;
 
         public void Initialize()
         {
-            Client = new MobileServiceClient(AppUrl);
+            Client = new MobileServiceClient(Constants.AzureMobileAppUrl);
 
             if (!string.IsNullOrWhiteSpace(Settings.UserId) && 
                 !string.IsNullOrWhiteSpace(Settings.AuthToken))

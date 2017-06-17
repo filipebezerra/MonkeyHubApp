@@ -6,15 +6,18 @@ namespace MonkeyHubApp.Pages
 {
     public partial class MainPage : ContentPage
     {
+        private MainViewModel viewModel;
+
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel(new MonkeyHubApiService());
+            BindingContext = viewModel = new MainViewModel(new MonkeyHubApiService());
         }
 
         protected override void OnAppearing()
         {
-            (BindingContext as MainViewModel)?.LoadTags();
+            viewModel.LoadTags();
+            viewModel.RegisterForPushNotification();
             base.OnAppearing();
         }
     }

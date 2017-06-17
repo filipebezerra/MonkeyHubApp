@@ -6,7 +6,7 @@ namespace MonkeyHubApp.Helpers
 {
     public static class Settings
     {
-        private static ISettings AppSettings { get { return CrossSettings.Current; } }
+        private static ISettings AppSettings => CrossSettings.Current;
 
         #region Setting Constants
         private const string UserIdKey = "userid_key";
