@@ -6,9 +6,9 @@ namespace MonkeyHubApp.Droid
 {
     [Activity(
         Label = "Monkey Hub", 
-        Icon = "@drawable/ic_launcher", 
+        Icon = "@drawable/ic_launcher",
+        LaunchMode = LaunchMode.SingleTask,
         Theme = "@style/MainTheme", 
-        MainLauncher = true, 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation
     )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
