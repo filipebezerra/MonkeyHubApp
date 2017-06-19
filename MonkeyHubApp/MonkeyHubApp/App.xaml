@@ -5,6 +5,11 @@
              x:Class="MonkeyHubApp.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Color x:Key="Primary">#2196F3</Color>
+
+            <OnPlatform x:TypeArguments="Color" Android="#FFF5F5F5" iOS="White" x:Key="WindowBackground"/>
+            <OnPlatform x:TypeArguments="Color" iOS="#C8C7CC" x:Key="ListSeparator"/>
+            
             <Style x:Key="HeaderContainer" TargetType="ContentView">
                 <Setter Property="Padding" Value="16" />
                 <Setter Property="BackgroundColor" Value="LightGray" />
@@ -34,10 +39,12 @@
 
             <Style x:Key="ListView" TargetType="controls:FullListView">
                 <Setter Property="HasUnevenRows" Value="True" />
-                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-                <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 <Setter Property="ItemsSource" Value="{Binding DataSource}" />
                 <Setter Property="ItemTappedCommand" Value="{Binding ShowItemTappedCommand}" />
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="SeparatorColor" Value="{DynamicResource ListSeparator}" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

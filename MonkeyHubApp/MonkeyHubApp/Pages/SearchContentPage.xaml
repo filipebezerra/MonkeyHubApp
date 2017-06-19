@@ -1,22 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MonkeyHubApp.Pages.SearchContentPage"
-             xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
-             Title="{Binding Title}"
-             >
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MonkeyHubApp.Pages.SearchContentPage"
+    xmlns:controls="clr-namespace:MonkeyHubApp.Controls;assembly:MonkeyHubApp"
+    Title="{Binding Title}"
+    BackgroundColor="{DynamicResource WindowBackground}"
+    >
     <StackLayout>
-        <SearchBar
-            Placeholder="Digite partes do conteúdo desejado"
-            SearchCommand="{Binding SearchCommand}"
-            Text="{Binding SearchText, Mode=OneWayToSource}"
-            />
+        <StackLayout>
+            <StackLayout.Padding>
+                <OnPlatform x:TypeArguments="Thickness" Android="0,8,8,8" iOS="0" />
+            </StackLayout.Padding>
 
-        <controls:FullListView Style="{StaticResource ListView}">
+            <StackLayout.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color" Android="{StaticResource Primary}" />
+            </StackLayout.BackgroundColor>
+
+            <SearchBar
+                Placeholder="Buscando por..."
+                SearchCommand="{Binding SearchCommand}"
+                Text="{Binding SearchText, Mode=OneWayToSource}"
+                FontSize="Small"
+                >
+                <SearchBar.PlaceholderColor>
+                    <OnPlatform x:TypeArguments="Color" Android="White" />
+                </SearchBar.PlaceholderColor>
+
+                <SearchBar.BackgroundColor>
+                    <OnPlatform x:TypeArguments="Color" Android="{StaticResource Primary}" />
+                </SearchBar.BackgroundColor>
+
+                <SearchBar.TextColor>
+                    <OnPlatform x:TypeArguments="Color" Android="White" />
+                </SearchBar.TextColor>
+
+                <SearchBar.CancelButtonColor>
+                    <OnPlatform x:TypeArguments="Color" Android="White" iOS="{StaticResource Primary}" />
+                </SearchBar.CancelButtonColor>
+            </SearchBar>
+        </StackLayout>
+
+        <controls:FullListView 
+            Style="{StaticResource ListView}"
+            AbsoluteLayout.LayoutFlags="All" 
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+            >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Vertical">
+                        <StackLayout>
                             <Label
                                 Style="{StaticResource SpacedFirstLineText}"
                                 Text="{Binding Name}"
